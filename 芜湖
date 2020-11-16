@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-wuhu='
+wuhuText='
 他强任他强，我吃我三狼
 他吊任他吊，我吃我大鸟
 他骚任他骚，我补我的刀
@@ -34,28 +34,31 @@ E点点Q点点W点点嘟嘟嘟嘟嘟嘟嘟嘟
 吸血怎么说\s吸血
 '
 
+wuhu() {
+  shuf -e -n 1 $wuhuText | sed 's/\\n/\n/g' | sed 's/\\s/ /g'
+  sleep 0.1
+}
+
+wuhuloop() {
+  for i in `seq 1 $qifei`;
+    do  
+      wuhu
+    done
+}
 
 case "$1" in
   0)
     while true;
     do 
-    shuf -e -n 1 $wuhu | sed 's/\\n/\n/g' | sed 's/\\s/ /g'
-    sleep 0.1
+        wuhu
     done
     ;;
   *[0-9]*)
     qifei=`echo "$1" | sed -E 's/[^0-9]*([0-9]*).*/\1/'`;
-    for i in `seq 1 $qifei`;
-    do  
-    shuf -e -n 1 $wuhu | sed 's/\\n/\n/g' | sed 's/\\s/ /g'
-    sleep 0.1
-    done
+    wuhuloop
     ;;
   *)
-    for i in `seq 0 ${#1}`;
-    do  
-    shuf -e -n 1 $wuhu | sed 's/\\n/\n/g' | sed 's/\\s/ /g'
-    sleep 0.1
-    done
+    let qifei=${#1}+1
+    wuhuloop
     ;;
 esac
