@@ -52,13 +52,13 @@ case "$1" in
         while true ; do 
             wuhu
         done
-    ;;
+        ;;
     *[0-9]*)
         qifei=`echo "$1" | sed -E 's/[^0-9]*([0-9]*).*/\1/'`;
         wuhuloop
-    ;;
+        ;;
     *)
         let qifei=${#1}+1
         wuhuloop
-    ;;
+        ;;
 esac
