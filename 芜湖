@@ -37,12 +37,12 @@ E点点Q点点W点点嘟嘟嘟嘟嘟嘟嘟嘟
 wuhu() {
     wuhu1=$(shuf -e -n 1 $wuhuText | sed 's/\\n/\n/g' | sed 's/\\s/ /g')
     echo -e "\033[$(shuf -e 0 0 0 0 1 4 5 7 -n1);$(shuf -i 31-37 -n1)m$wuhu1\033[0m"
-    sleep 0.1
 }
 
 wuhuloop() {
     for i in `seq 1 $qifei` ; do  
       wuhu
+      sleep 0.1
     done
 }
 
