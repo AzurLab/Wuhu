@@ -1,5 +1,9 @@
 #!/system/bin/sh
+##############################
+# 芜湖 https://github.com/AzurLab/Wuhu
+##############################
 
+#芜湖语录
 wuhuText='
 他强任他强，我吃我三狼
 他吊任他吊，我吃我大鸟
@@ -34,12 +38,21 @@ E点点Q点点W点点嘟嘟嘟嘟嘟嘟嘟嘟
 吸血怎么说\s吸血
 '
 
+#芜湖一次
 wuhu() {
+    #抽取一句芜湖语
     wuhu1=$(shuf -e -n 1 $wuhuText | sed 's/\\n/\n/g' | sed 's/\\s/ /g')
-    echo -e "\033[$(shuf -e 0 0 0 0 1 4 5 7 -n1);$(shuf -i 31-37 -n1)m$wuhu1\033[0m"
-    sleep 0.1
+    #随机样式
+    c1=$(shuf -e 0 0 0 0 1 4 5 7 -n1)
+    #随机文字颜色
+    c2=$(shuf -i 31-37 -n1)
+    for line in ${wuhu1}; do
+        echo -e "\033[${c1};${c2}m${line}\033[0m"
+        sleep 0.1
+    done
 }
 
+#芜湖循环
 wuhuloop() {
     for i in `seq 1 $qifei` ; do  
       wuhu
@@ -49,15 +62,18 @@ wuhuloop() {
 case "$1" in
     0);&
     *起飞*)
+        #一直起飞一直爽，ctrl+c 手动终止
         while true ; do 
             wuhu
         done
         ;;
     *[0-9]*)
+        #获取起飞次数
         qifei=`echo "$1" | sed -E 's/[^0-9]*([0-9]*).*/\1/'`;
         wuhuloop
         ;;
     *)
+        #以字符长度作为起飞次数
         let qifei=${#1}+1
         wuhuloop
         ;;
