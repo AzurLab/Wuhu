@@ -40,14 +40,16 @@ E点点Q点点W点点嘟嘟嘟嘟嘟嘟嘟嘟
 
 #芜湖一次
 wuhu() {
-    #抽取一句芜湖语
-    wuhu1=$(shuf -e -n 1 $wuhuText | sed 's/\\n/\n/g' | sed 's/\\s/ /g')
+    #抽取一句芜湖语，并分离行
+    wuhu1=$(shuf -e -n 1 $wuhuText | sed 's/\\n/\n/g')
     #随机样式
     c1=$(shuf -e 0 0 0 0 1 4 5 7 -n1)
     #随机文字颜色
     c2=$(shuf -i 31-37 -n1)
     for line in ${wuhu1}; do
-        echo -e "\033[${c1};${c2}m${line}\033[0m"
+        #还原空格
+        line1=$(echo $line | sed 's/\\s/ /g')
+        echo -e "\033[${c1};${c2}m${line1}\033[0m"
         sleep 0.1
     done
 }
